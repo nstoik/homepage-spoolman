@@ -416,6 +416,7 @@ export function cleanServiceGroups(groups) {
 
           // spoolman
           spoolIds,
+          spoolSort,
 
           // grafana
           alerts,
@@ -613,6 +614,7 @@ export function cleanServiceGroups(groups) {
         }
         if (type === "spoolman") {
           if (spoolIds !== undefined) widget.spoolIds = spoolIds;
+          if (spoolSort !== undefined) widget.spoolSort = spoolSort;
         }
         if (type === "jellystat") {
           if (days !== undefined) widget.days = parseInt(days, 10);
