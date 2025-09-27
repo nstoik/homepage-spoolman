@@ -43,6 +43,14 @@ export default function Component({ service }) {
     spoolData = spoolData.filter((spool) => widget.spoolIds.includes(spool.id));
   }
 
+  if (widget.spoolSort === "lastUsed") {
+    spoolData = spoolData.slice().sort((a, b) => new Date(b.last_used) - new Date(a.last_used));
+  }
+  else if (widget.spoolSort === "leastRemaining") {
+    spoolData = spoolData.slice().sort((a, b) => (a.remaining_weight / a.initial_weight) - (b.remaining_weight / b.initial_weight));
+  }
+  // if widget.spoolSort is blank or undefined, no sorting is applied
+
   if (spoolData.length > 4) {
     spoolData = spoolData.slice(0, 4);
   }
