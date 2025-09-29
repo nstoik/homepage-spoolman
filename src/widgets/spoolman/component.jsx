@@ -16,7 +16,7 @@ export default function Component({ service }) {
   }
 
   if (!spoolData) {
-    const nBlocksGuess = widget.spoolIds?.length ?? 4;
+    const nBlocksGuess = widget.spoolFilterValues?.length ?? 4;
     return (
       <Container service={service}>
         {[...Array(nBlocksGuess)].map((_, i) => (
@@ -39,10 +39,22 @@ export default function Component({ service }) {
     );
   }
 
-  if (widget.spoolIds?.length) {
-    spoolData = spoolData.filter((spool) => widget.spoolIds.includes(spool.id));
+  // Apply filtering on the spools
+  if (widget.spoolFilter === "id") {
+    spoolData = spoolData.filter((spool) => widget.spoolFilterValues.includes(spool.id));
   }
+  else if (widget.spoolFilter === "location") {
+    spoolData = spoolData.filter((spool) => widget.spoolFilterValues.includes(spool.location));
+  }
+  else if (widget.spoolFilter === "lot_nr") {
+    spoolData = spoolData.filter((spool) => widget.spoolFilterValues.includes(spool.lot_nr));
+  }
+  else if (widget.spoolFilter === "comment") {
+    spoolData = spoolData.filter((spool) => widget.spoolFilterValues.includes(spool.comment));
+  }
+  // if widget.spoolFilter is blank or undefined, no filtering is applied
 
+  // Apply sorting on the spools
   if (widget.spoolSort === "lastUsed") {
     spoolData = spoolData.slice().sort((a, b) => new Date(b.last_used) - new Date(a.last_used));
   }

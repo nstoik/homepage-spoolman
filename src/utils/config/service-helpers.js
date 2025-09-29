@@ -415,7 +415,8 @@ export function cleanServiceGroups(groups) {
           range,
 
           // spoolman
-          spoolIds,
+          spoolFilter,
+          spoolFilterValues,
           spoolSort,
 
           // grafana
@@ -613,7 +614,8 @@ export function cleanServiceGroups(groups) {
           if (refreshInterval) widget.refreshInterval = refreshInterval;
         }
         if (type === "spoolman") {
-          if (spoolIds !== undefined) widget.spoolIds = spoolIds;
+          if (spoolFilter !== undefined) widget.spoolFilter = spoolFilter;
+          if (spoolFilterValues !== undefined) widget.spoolFilterValues = spoolFilterValues;
           if (spoolSort !== undefined) widget.spoolSort = spoolSort;
         }
         if (type === "jellystat") {
